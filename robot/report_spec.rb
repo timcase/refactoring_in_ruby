@@ -1,6 +1,6 @@
-require 'machine'
-require 'robot'
-require 'report'
+require_relative 'machine'
+require_relative 'robot'
+require_relative 'report'
 require 'stringio'
 
 describe Report do
@@ -32,6 +32,6 @@ Machine oven bin=chips
 Robot location=extruder bin=paste
 ========
 END_OF_EXPECTED
-    out.string.should == expected
+    expect(out.string).to eq(expected)
   end
 end

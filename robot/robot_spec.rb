@@ -1,5 +1,5 @@
-require 'machine'
-require 'robot'
+require_relative 'machine'
+require_relative 'robot'
 
 describe Robot, 'when new' do
   before :each do
@@ -7,11 +7,11 @@ describe Robot, 'when new' do
   end
 
   it 'has no location yet' do
-    @robot.location.should be_nil
+    expect(@robot.location).to be_nil
   end
 
   it 'does not point at a bin yet' do
-    @robot.bin.should be_nil
+    expect(@robot.bin).to be_nil
   end
 end
 
@@ -26,16 +26,16 @@ describe Robot, "in a world with machines" do
   describe 'moving among machines' do
     it 'reports correct location' do
       @robot.move_to(@oven)
-      @robot.location.should == @oven
+      expect(@robot.location).to eq(@oven)
     end
   end
 
   describe "moving and picking" do
     it 'should take the bin away from the machine' do
-      lambda {
+      expect(lambda {
         @robot.move_to(@sorter)
         @robot.pick
-      }.should change { @sorter.bin }.from("chips").to(nil)
+      }).to change { @sorter.bin }.from('chips').to(nil)
     end
   end
 
@@ -48,15 +48,15 @@ describe Robot, "in a world with machines" do
     end
 
     it 'should take the bin away from the sorter' do
-      lambda {
+      expect(lambda {
         move_and_pick_and_move_and_release
-      }.should change { @sorter.bin }.from("chips").to(nil)
+      }).to change { @sorter.bin }.from('chips').to(nil)
     end
 
     it 'should deposit the bin at the oven' do
-      lambda {
+      expect(lambda {
         move_and_pick_and_move_and_release
-      }.should change { @oven.bin }.from(nil).to("chips")
+      }).to change { @oven.bin }.from(nil).to('chips')
     end
   end
 end

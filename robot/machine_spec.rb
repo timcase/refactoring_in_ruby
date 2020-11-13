@@ -1,4 +1,4 @@
-require 'machine'
+require_relative 'machine'
 
 describe Machine do
   before :each do
@@ -6,11 +6,11 @@ describe Machine do
   end
 
   it 'should initially have no bin' do
-    @machine.bin.should be_nil
+    expect(@machine.bin).to be_nil
   end
 
   it 'should accept things into its bin' do
     @machine.put("chips")
-    @machine.bin.should == "chips"
+    expect(@machine.bin).to eq('chips')
   end
 end
